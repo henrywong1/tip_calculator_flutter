@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tip_app/constants.dart';
 
 class InputSection extends StatelessWidget {
   final Function onChanged;
@@ -18,7 +17,7 @@ class InputSection extends StatelessWidget {
           ),
         ),
         Container(
-          padding: EdgeInsets.only(top: 40),
+          padding: EdgeInsets.only(top: 10),
           width: 170,
           child: TextField(
             onChanged: onChanged,
@@ -26,7 +25,7 @@ class InputSection extends StatelessWidget {
             decoration: InputDecoration(
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
-                  color: kColorTheme,
+                  color: Colors.greenAccent,
                 ),
               ),
               focusedBorder: UnderlineInputBorder(
