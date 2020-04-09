@@ -20,9 +20,15 @@ class _TipScreenState extends State<TipScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(15)
+            ),
+          ),
           backgroundColor: Colors.greenAccent,
           title: Center(
             child: Text(
@@ -202,6 +208,9 @@ class _TipScreenState extends State<TipScreen> {
                               children: <Widget>[
                                 Text(
                                   'Total per person',
+                                  style: TextStyle(
+                                    fontSize: 15
+                                  ),
                                 ),
                                 Text(
                                     '\$${(calculatedValue / numPeople).toStringAsFixed(2)}',
@@ -211,7 +220,7 @@ class _TipScreenState extends State<TipScreen> {
                             Column(
                               children: <Widget>[
                                 Text('Tip Amount'),
-                                Text('\$7.5'),
+                                Text('\$${(billAmount * percentValue).toStringAsFixed(2)}'),
                               ],
                             ),
                           ],
