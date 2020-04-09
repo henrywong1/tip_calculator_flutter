@@ -31,7 +31,7 @@ class InputSection extends StatelessWidget {
               ),
               focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                color: kColorTheme,
+                color: Colors.greenAccent,
               )),
               hintText: 'Enter Amount',
               hintStyle: TextStyle(
@@ -39,13 +39,13 @@ class InputSection extends StatelessWidget {
               ),
               prefixIcon: Icon(
                 Icons.attach_money,
-                color: kColorTheme,
+                color: Colors.greenAccent,
               ),
             ),
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
-              color: kColorTheme,
+              color: Colors.greenAccent,
             ),
           ),
         ),

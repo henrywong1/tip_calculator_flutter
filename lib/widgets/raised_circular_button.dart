@@ -11,14 +11,14 @@ class RaisedCircularButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return RaisedButton(
       onPressed: onPressed,
-      color: Colors.white,
+      color: Colors.greenAccent,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
       child: Text(
         label,
         style: TextStyle(
-          color: Colors.green,
+          color: Colors.black,
           fontWeight: FontWeight.bold,
         ),
       ),
