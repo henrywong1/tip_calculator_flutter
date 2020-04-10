@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:tip_app/widgets/input_section.dart';
 import 'package:tip_app/widgets/raised_circular_button.dart';
+import 'package:tip_app/widgets/tip_dialog.dart';
 
 void main() => runApp(TipScreen());
 
 class TipScreen extends StatefulWidget {
+  final String title;
+  static final navKey = new GlobalKey<NavigatorState>();
+  const TipScreen({Key navKey, this.title}) : super(key: navKey);
   @override
   _TipScreenState createState() => _TipScreenState();
 }
 
 class _TipScreenState extends State<TipScreen> {
+  double customTipPercent = 0.0;
   int numPeople = 1;
   double billAmount = 0.0;
   double calculatedValue = 0.0;
   double percentValue = 0;
+  double totalPerPerson = 0;
 
   List<RaisedCircularButton> percentButtons = [];
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: TipScreen.navKey,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black87,
         appBar: AppBar(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
@@ -82,6 +89,7 @@ class _TipScreenState extends State<TipScreen> {
                                 percentValue = 0.1;
                                 calculatedValue =
                                     billAmount + billAmount * percentValue;
+                                totalPerPerson = (calculatedValue / numPeople);
                               });
                             },
                           ),
@@ -91,6 +99,7 @@ class _TipScreenState extends State<TipScreen> {
                                 percentValue = 0.15;
                                 calculatedValue =
                                     billAmount + billAmount * percentValue;
+                                totalPerPerson = (calculatedValue / numPeople);
                               });
                             },
                             label: '15%',
@@ -101,6 +110,7 @@ class _TipScreenState extends State<TipScreen> {
                                 percentValue = 0.2;
                                 calculatedValue =
                                     billAmount + billAmount * percentValue;
+                                totalPerPerson = (calculatedValue / numPeople);
                               });
                             },
                             label: '20%',
@@ -117,12 +127,24 @@ class _TipScreenState extends State<TipScreen> {
                                 percentValue = 0.25;
                                 calculatedValue =
                                     billAmount + billAmount * percentValue;
+                                totalPerPerson = (calculatedValue / numPeople);
                               });
                             },
                             label: '25%',
                           ),
                           RaisedCircularButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              final context = TipScreen.navKey.currentState.overlay.context;
+                              TipDialog().createAlertDialog(context).then((onValue) {
+                                customTipPercent = double.parse(onValue);
+                                print(customTipPercent);
+                                setState(() {
+                                  percentValue = customTipPercent / 100;
+                                  calculatedValue = billAmount + billAmount * percentValue;
+                                  totalPerPerson = (calculatedValue / numPeople);
+                                });
+                              });
+                            },
                             label: 'Custom Tip',
                           ),
                         ],
@@ -131,7 +153,7 @@ class _TipScreenState extends State<TipScreen> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(40),
+                  padding: EdgeInsets.all(30),
                   child: Column(
                     children: <Widget>[
                       Text(
@@ -148,6 +170,7 @@ class _TipScreenState extends State<TipScreen> {
                             onPressed: () {
                               setState(() {
                                 numPeople = numPeople > 1 ? numPeople - 1 : 1;
+                                totalPerPerson = (calculatedValue / numPeople);
                               });
                             },
                             color: Colors.greenAccent,
@@ -167,6 +190,7 @@ class _TipScreenState extends State<TipScreen> {
                             onPressed: () {
                               setState(() {
                                 numPeople++;
+                                totalPerPerson = (calculatedValue / numPeople);
                               });
                             },
                             icon: Icon(
@@ -213,7 +237,7 @@ class _TipScreenState extends State<TipScreen> {
                                   ),
                                 ),
                                 Text(
-                                    '\$${(calculatedValue / numPeople).toStringAsFixed(2)}',
+                                    '\$${totalPerPerson.toStringAsFixed(2)}',
                                 ),
                               ],
                             ),

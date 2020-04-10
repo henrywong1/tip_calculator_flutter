@@ -9,17 +9,20 @@ class RaisedCircularButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      onPressed: onPressed,
-      color: Colors.greenAccent,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: RaisedButton(
+        onPressed: onPressed,
+        color: Colors.greenAccent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
